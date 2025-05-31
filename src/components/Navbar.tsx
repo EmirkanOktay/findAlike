@@ -14,6 +14,13 @@ import logo from '../images/logoNav.png';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
+export const menuItems = [
+    { name: 'Find Similar Songs', href: '#' },
+    { name: 'Find Similar Artist', href: '#' },
+    { name: 'Find Similar Genre', href: '#' },
+    { name: 'Download Music', href: '#' }
+];
+
 function Navbar() {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [screenHeight, setScreenHeight] = useState(120);
@@ -43,13 +50,6 @@ function Navbar() {
         };
     }, []);
 
-    const menuItems = [
-        { name: 'Find Similar Songs', href: '#' },
-        { name: 'Find Similar Artist', href: '#' },
-        { name: 'Find Similar Genre', href: '#' },
-        { name: 'Download Music', href: '#' }
-    ];
-
     const toggleDrawer = (open: boolean) => () => setDrawerOpen(open);
 
     return (
@@ -65,21 +65,35 @@ function Navbar() {
                 }}
             >
                 <Toolbar sx={{ justifyContent: 'space-between', minHeight: scrolled ? screenHeight * 0.7 : screenHeight, transition: 'min-height 0.3s ease' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', height: scrolled ? screenHeight * 0.7 : screenHeight, overflow: 'hidden', transition: 'height 0.3s ease' }}>
-                        <img
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            height: scrolled ? screenHeight * 0.7 : screenHeight,
+                            overflow: 'hidden',
+                            transition: 'height 0.3s ease',
+                        }}
+                    >
+                        <Box
+                            component="img"
                             src={logo}
                             alt="Logo"
-                            style={{
-                                height: scrolled ? '14vh' : '20vh',
+                            sx={{
+                                height: {
+                                    xs: '14vh',
+                                    md: '10vh',
+                                    xl: scrolled ? '16vh' : '22vh'
+                                },
                                 objectFit: 'contain',
                                 cursor: 'pointer',
-                                transition: 'height 0.3s ease'
+                                transition: 'height 0.3s ease',
                             }}
                         />
                     </Box>
 
+
                     {!isMobile && (
-                        <Box sx={{ display: 'flex', gap: 3 }}>
+                        <Box sx={{ display: 'flex', gap: 3, }}>
                             {menuItems.map((item, i) => (
                                 <Button
                                     key={i}
@@ -87,8 +101,8 @@ function Navbar() {
                                     sx={{
                                         position: 'relative',
                                         color: '#1DB954',
-                                        fontWeight: 500,
-                                        fontSize: '0.9rem',
+                                        fontWeight: 600,
+                                        fontSize: '1rem',
                                         textTransform: 'none',
                                         fontFamily: "'Poppins', sans-serif",
                                         transition: '1s',
@@ -165,7 +179,7 @@ function Navbar() {
                         />
                     </Box>
 
-                    <List sx={{ width: '100%', maxWidth: 300 }}>
+                    <List sx={{ width: '100%', maxWidth: 300, }}>
                         {menuItems.map((item, i) => (
                             <ListItem key={i} disablePadding>
                                 <ListItemButton component="a" href={item.href}>
