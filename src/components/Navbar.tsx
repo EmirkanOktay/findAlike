@@ -13,15 +13,27 @@ import ListItemText from '@mui/material/ListItemText';
 import logo from '../images/logoNav.png';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
-export const menuItems = [
-    { name: 'Find Similar Songs', href: '#' },
-    { name: 'Find Similar Artist', href: '#' },
-    { name: 'Find Similar Genre', href: '#' },
-    { name: 'Download Music', href: '#' }
+interface menuItemInterface {
+    name: string;
+}
+
+export const menuItems: menuItemInterface[] = [
+    { name: 'Find Similar Songs' },
+    { name: 'Find Similar Artists' },
+    { name: 'Find Similar Genres' },
+    { name: 'Download Music', }
 ];
 
 function Navbar() {
+    const navigate = useNavigate();
+
+    const menuItemsNavigate = (name: string) => {
+        navigate(`/${name.toLocaleLowerCase().replace(/\s+/g, '-')}`);
+
+    }
+
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [screenHeight, setScreenHeight] = useState(120);
     const [scrolled, setScrolled] = useState(false);
@@ -77,6 +89,7 @@ function Navbar() {
                         <Box
                             component="img"
                             src={logo}
+                            onClick={() => navigate('/')}
                             alt="Logo"
                             sx={{
                                 height: {
@@ -96,8 +109,9 @@ function Navbar() {
                         <Box sx={{ display: 'flex', gap: 3, }}>
                             {menuItems.map((item, i) => (
                                 <Button
+                                    onClick={() => { menuItemsNavigate(item.name) }}
+
                                     key={i}
-                                    href={item.href}
                                     sx={{
                                         position: 'relative',
                                         color: '#1DB954',
@@ -182,7 +196,7 @@ function Navbar() {
                     <List sx={{ width: '100%', maxWidth: 300, }}>
                         {menuItems.map((item, i) => (
                             <ListItem key={i} disablePadding>
-                                <ListItemButton component="a" href={item.href}>
+                                <ListItemButton component="a">
                                     <ListItemText
                                         primary={item.name}
                                         primaryTypographyProps={{

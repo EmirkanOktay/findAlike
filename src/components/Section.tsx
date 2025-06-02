@@ -1,9 +1,11 @@
 import { Button, Box, useMediaQuery, useTheme } from '@mui/material';
 import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type Point = { x: number; y: number };
 
 export default function Section() {
+    const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(false);
     const [time, setTime] = useState(0);
     const requestRef = useRef<number | null>(null);
@@ -111,6 +113,7 @@ export default function Section() {
                     }}
                 >
                     <Button
+                        onClick={() => navigate('/find-similar-songs')}
                         variant="contained"
                         sx={{
                             bgcolor: '#fff',

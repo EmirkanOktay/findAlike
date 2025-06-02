@@ -1,8 +1,14 @@
 import { Box, Typography, Link, Stack } from '@mui/material';
 import logo from '../images/logoNav.png';
 import { menuItems } from './Navbar';
+import { useNavigate } from 'react-router-dom';
 
 function Footer() {
+    const navigate = useNavigate();
+    const menuItemsNavigate = (name: string) => {
+        navigate(`/${name.toLocaleLowerCase().replace(/\s+/g, '-')}`);
+
+    }
     return (
         <Box
             component="footer"
@@ -52,15 +58,18 @@ function Footer() {
                     <Stack spacing={1}>
                         {menuItems.map((item, i) => (
                             <Link
+                                onClick={() => { menuItemsNavigate(item.name) }}
+
                                 key={i}
-                                href={item.href}
                                 underline="none"
                                 sx={{
                                     color: '#1DB954',
                                     fontSize: '0.95rem',
                                     transition: '0.3s',
                                     '&:hover': { color: 'white' },
+                                    cursor: 'pointer',
                                 }}
+
                             >
                                 {item.name}
                             </Link>
@@ -73,7 +82,6 @@ function Footer() {
                         Contact
                     </Typography>
                     <Link
-                        href=""
                         underline="none"
                         sx={{
                             color: '#1DB954',
@@ -93,14 +101,17 @@ function Footer() {
                     <Stack spacing={1}>
                         {['Terms of Service', 'Privacy Policy', 'DMCA'].map((text, i) => (
                             <Link
+                                onClick={() => { menuItemsNavigate(text) }}
+
                                 key={i}
-                                href="#"
                                 underline="none"
                                 sx={{
                                     color: '#1DB954',
                                     fontSize: '0.95rem',
                                     transition: '0.3s',
+                                    cursor: 'pointer',
                                     '&:hover': { color: 'white' },
+
                                 }}
                             >
                                 {text}

@@ -1,14 +1,13 @@
 import './App.css'
 import ScrollToTop from './components/scrollToTop'
-import Home from './pages/Home'
+import Router from './Router/Router'
 
 function App() {
 
   return (
     <>
-      <Home />
+      <Router />
       <ScrollToTop />
-
     </>
   )
 }

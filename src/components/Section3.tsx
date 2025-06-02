@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Button, Box, useMediaQuery, useTheme } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function Section3() {
+    const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
     const theme = useTheme();
     const isMobileOrTablet = useMediaQuery(theme.breakpoints.down('md'));
@@ -52,6 +54,7 @@ export default function Section3() {
                 </Box>
 
                 <Button
+                    onClick={() => navigate('/find-similar-genres')}
                     variant="contained"
                     sx={{
                         backgroundColor: '#ffffff',
